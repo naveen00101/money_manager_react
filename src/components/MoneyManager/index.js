@@ -21,38 +21,17 @@ class MoneyManager extends Component {
   state = {
     titleInput: '',
     amountInput: '',
-    type: 'INCOME',
+    type: transactionTypeOptions[0].optionId,
     history: [],
-    balance: 0,
-    income: 0,
-    expenses: 0,
   }
 
   onDelete = id => {
-    let a
-    let t
-    this.setState(prevState => ({
-      history: prevState.history.filter(eachItem => {
-        if (eachItem.id !== id) {
-          return true
-        }
-        a = eachItem.amount
-        t = eachItem.type
-        return false
-      }),
-    }))
+    const {history} = this.state
+    const filteredHistory = history.filter(eachItem => id !== eachItem.id)
 
-    if (t === 'INCOME') {
-      this.setState(prevState => ({
-        balance: prevState.balance - a,
-        income: prevState.income - a,
-      }))
-    } else {
-      this.setState(prevState => ({
-        balance: prevState.balance + a,
-        expenses: prevState.expenses - a,
-      }))
-    }
+    this.setState({
+      history: filteredHistory,
+    })
   }
 
   onChangeTitleInput = event => {
@@ -74,32 +53,76 @@ class MoneyManager extends Component {
     const historyItem = {
       id: v4(),
       title: titleInput,
-      amount: amountInput,
+      amount: Number(amountInput),
       type,
-    }
-    const a = Number(amountInput)
-    console.log(typeof a)
-
-    if (type === 'INCOME') {
-      this.setState(prevState => ({
-        balance: prevState.balance + a,
-        income: prevState.income + a,
-      }))
-    } else {
-      this.setState(prevState => ({
-        balance: prevState.balance - a,
-        expenses: prevState.expenses + a,
-      }))
     }
 
     this.setState(prevState => {
       const {history} = prevState
-      return {history: [...history, historyItem]}
+      return {
+        history: [...history, historyItem],
+        titleInput: '',
+        amountInput: '',
+        type: '',
+      }
     })
   }
 
+  getExpenses = () => {
+    const {history} = this.state
+    let expenses = 0
+    history.forEach(eachItem => {
+      if (eachItem.type === 'EXPENSES') {
+        expenses += eachItem.amount
+      }
+    })
+    // console.log(`expenses ${expenses}`)
+    return expenses
+  }
+
+  getIncome = () => {
+    const {history} = this.state
+    let income = 0
+    history.forEach(eachItem => {
+      if (eachItem.type === 'INCOME') {
+        income += eachItem.amount
+      }
+    })
+    // console.log(`income ${income}`)
+    return income
+  }
+
+  getBalance = () => {
+    const {history} = this.state
+    let balance = 0
+    let income = 0
+    let expenses = 0
+    history.forEach(eachItem => {
+      if (eachItem.type === 'INCOME') {
+        income += eachItem.amount
+      } else {
+        expenses += eachItem.amount
+      }
+    })
+
+    balance = income - expenses
+
+    console.log('------------------------------------------------------------')
+    console.log(`expenses ${expenses}`)
+    console.log(`income ${income}`)
+    console.log(`balance ${balance}`)
+    console.log('------------------------------------------------------------')
+
+    return balance
+  }
+
   render() {
-    const {history, balance, income, expenses} = this.state
+    const {history, titleInput, amountInput, type} = this.state
+
+    const income = this.getIncome()
+    const expenses = this.getExpenses()
+    const balance = this.getBalance()
+
     return (
       <div className="bg-container">
         <div className="welcome-box">
@@ -116,15 +139,15 @@ class MoneyManager extends Component {
 
         <div className="transaction-sec">
           <div className="add box">
-            <h1 className="h2">Add Transaction</h1>
             <form className="add-box" onSubmit={this.onAddTransaction}>
+              <h1 className="h2">Add Transaction</h1>
               <label className="label" htmlFor="title">
                 TITLE
               </label>
               <input
                 type="text"
                 placeholder="TITLE"
-                name="title"
+                value={titleInput}
                 id="title"
                 onChange={this.onChangeTitleInput}
               />
@@ -135,32 +158,25 @@ class MoneyManager extends Component {
               <input
                 type="text"
                 placeholder="AMOUNT"
-                name="amount"
+                value={amountInput}
                 id="amount"
                 onChange={this.onChangeAmountInput}
               />
 
-              <label className="label" htmlFor="title">
+              <label className="label" htmlFor="select">
                 TYPE
               </label>
               <select
+                id="select"
                 className="type-options"
                 onChange={this.onChangeTypeInput}
+                value={type}
               >
-                {transactionTypeOptions.map(eachItem => {
-                  if (eachItem.optionId === 'INCOME') {
-                    return (
-                      <option value={eachItem.optionId} selected>
-                        {eachItem.displayText}
-                      </option>
-                    )
-                  }
-                  return (
-                    <option value={eachItem.optionId}>
-                      {eachItem.displayText}
-                    </option>
-                  )
-                })}
+                {transactionTypeOptions.map(eachItem => (
+                  <option value={eachItem.optionId} key={eachItem.optionId}>
+                    {eachItem.displayText}
+                  </option>
+                ))}
               </select>
 
               <button type="submit" className="add-btn">
@@ -171,22 +187,21 @@ class MoneyManager extends Component {
 
           <div className="history box">
             <h1 className="h2">History</h1>
-            <div className="his">
-              <div className="headings">
+            <ul className="his">
+              <li className="headings">
                 <p className="h">Title</p>
                 <p className="h">Amount</p>
                 <p className="h">Type</p>
-              </div>
-              <ul>
-                {history.map(eachItem => (
-                  <TransactionItem
-                    item={eachItem}
-                    del={this.onDelete}
-                    key={eachItem.id}
-                  />
-                ))}
-              </ul>
-            </div>
+              </li>
+
+              {history.map(eachItem => (
+                <TransactionItem
+                  item={eachItem}
+                  del={this.onDelete}
+                  key={eachItem.id}
+                />
+              ))}
+            </ul>
           </div>
         </div>
       </div>

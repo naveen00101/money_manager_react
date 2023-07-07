@@ -3,6 +3,7 @@ import './index.css'
 
 const MoneyDetails = props => {
   const {balance, income, expenses} = props
+
   return (
     <div className="money-item-sec">
       <div className="bal sec">

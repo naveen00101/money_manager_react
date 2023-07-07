@@ -7,7 +7,14 @@ const TransactionItem = props => {
   const {id, title, amount, type} = item
 
   const onDel = () => {
-    del(id)
+    let a
+    if (type === 'INCOME') {
+      a = 0 - amount
+    } else {
+      a = amount
+    }
+
+    del(id, a)
   }
 
   return (
