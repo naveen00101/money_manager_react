@@ -1,0 +1,51 @@
+/* Write your CSS here */
+.money-item-sec {
+  display: flex;
+  justify-content: space-evenly;
+  width: 60vw;
+}
+
+.icon {
+  width: 70px;
+}
+
+.sec {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 20px;
+  border-width: 2px;
+  border-style: solid;
+  min-width: 280px;
+  height: 130px;
+  margin: 10px;
+}
+
+.bal {
+  background-color: #ecfccb;
+  border-color: #84cc16;
+}
+
+.income {
+  background-color: #cffafe;
+  border-color: #06b6d4;
+}
+
+.expenses {
+  background-color: #ede9fe;
+  border-color: #7c3aed;
+}
+
+.info {
+  padding-left: 10px;
+  font-family: roboto;
+}
+
+.info-1 {
+  font-size: 15px;
+}
+
+.info-2 {
+  font-size: 26px;
+  font-weight: 400;
+}

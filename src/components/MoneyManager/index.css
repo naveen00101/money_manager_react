@@ -1,0 +1,130 @@
+/* Write your CSS here */
+.bg-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.welcome-box {
+  min-width: 75vw;
+  background-image: url('https://assets.ccbp.in/frontend/react-js/money-manager/money-manager-bg.png');
+  background-size: cover;
+  padding: 40px;
+  height: 190px;
+  margin-bottom: 30px;
+  border-radius: 15px;
+  font-family: roboto;
+}
+
+.greeting {
+  font-size: 40px;
+  font-weight: 400;
+}
+
+.welcome {
+  font-size: 18px;
+}
+
+.highlight {
+  color: #0b69ff;
+  font-weight: 500;
+}
+
+.transaction-sec {
+  display: flex;
+  width: 80vw;
+  justify-content: space-evenly;
+}
+
+.add {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.add-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.label {
+  font-family: roboto;
+}
+
+.h2 {
+  font-family: roboto;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.box {
+  margin-top: 40px;
+  border: 2px solid #cbd5e1;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+label {
+  margin-top: 20px;
+}
+
+input {
+  height: 40px;
+  width: 300px;
+  margin-top: 6px;
+  border-radius: 5px;
+  border-color: #cbd5e1;
+  border-style: solid;
+  padding: 10px;
+}
+
+.type-options {
+  height: 40px;
+  width: 300px;
+  border-radius: 6px;
+  border-color: #cbd5e1;
+  border-style: solid;
+  padding: 10px;
+  margin-top: 6px;
+}
+
+.add-btn {
+  margin-top: 20px;
+  background-color: #0b69ff;
+  width: 80px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  font-family: roboto;
+  font-size: 14px;
+  color: white;
+}
+
+.headings {
+  display: flex;
+  justify-content: space-evenly;
+  width: 300px;
+}
+
+.h {
+  width: 60px;
+  font-family: roboto;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.his {
+  margin-top: 20px;
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+  width: 400px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}

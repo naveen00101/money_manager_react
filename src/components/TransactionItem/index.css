@@ -1,0 +1,25 @@
+/* Write your CSS here */
+.transaction-item {
+  display: flex;
+  justify-content: space-evenly;
+  padding-left: 0;
+  width: 400px;
+}
+
+.li {
+  list-style: none;
+}
+
+.delete-btn {
+  background-color: transparent;
+  border: none;
+}
+
+.delete-img {
+  width: 25px;
+}
+
+.line {
+  background-color: #cbd5e1;
+  color: #cbd5e1;
+}
